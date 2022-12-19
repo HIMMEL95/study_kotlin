@@ -1,47 +1,59 @@
 fun Solution(s: String):Int {
-    val hashMap =  hashMapOf('I' to 1, 'V' to 5, 'X' to 10, 'L' to 50, 'C' to 100, 'D' to 500, 'M' to 1000)
+    val symbol = arrayListOf<Char>('I', 'V', 'X', 'L', 'C', 'D', 'M')
+    val value = arrayListOf<Int>(1, 5, 10, 50, 100, 500, 1000)
 
+    val hashMap = mutableMapOf<Char, Int>()
+
+    for (i in 0 until symbol.size) {
+        hashMap.put(symbol[i], value[i])
+    }
+
+    var str = s
     var result = 0
     var type = true
 
     while (type) {
-        if (s.contains("IV")) {
+        if (str.contains("IV")) {
             result += 4
-            s.replace("IV", "")
-        } else if (s.contains("IX")) {
+            str = str.replace("IV", "")
+        } else if (str.contains("IX")) {
             result += 9
-            s.replace("IX", "")
-        } else if (s.contains("XL")) {
+            str = str.replace("IX", "")
+        } else if (str.contains("XL")) {
             result += 40
-            s.replace("XL", "")
-        } else if (s.contains("XC")) {
+            str = str.replace("XL", "")
+        } else if (str.contains("XC")) {
             result += 90
-            s.replace("XC", "")
-        } else if (s.contains("CD")) {
+            str = str.replace("XC", "")
+        } else if (str.contains("CD")) {
             result += 400
-            s.replace("CD", "")
-        } else if (s.contains("CM")) {
+            str = str.replace("CD", "")
+        } else if (str.contains("CM")) {
             result += 900
-            s.replace("CM", "")
+            str = str.replace("CM", "")
         } else {
             type = false
         }
     }
 
-    for (i in 0 until s.length) {
-        if (hashMap.containsKey(s[i])) {
-            var a:Int? = hashMap.get(s[i])
-            if (a != null) {
-                result += a
+
+    for (i in 0 until str.length) {
+        if (hashMap.containsKey(str[i])) {
+            var count: Int? = hashMap.get(str.elementAt(i))
+            if (count != null) {
+                result += count
             }
         }
     }
-
     return result
 }
 
+
 fun main() {
-    var s = "III"
+//    var s = "III"
+//    println(Solution(s))
+    var s = "MCMXCIV"
     println(Solution(s))
+
 }
 
